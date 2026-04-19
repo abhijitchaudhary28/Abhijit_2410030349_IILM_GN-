@@ -1,5 +1,6 @@
 # EXPERIMENT 9
 #### QUERY 1 : Display the name of emp name who earns highest salary. 
+```sql
 SELECT enameFROM employee WHERE sal = (SELECT MAX(sal) FROM employee);
 
 +-------+
@@ -8,8 +9,9 @@ SELECT enameFROM employee WHERE sal = (SELECT MAX(sal) FROM employee);
 | KING  |
 +-------+
 1 row in set (0.075 sec)
-
+```
 #### QUERY 2 : Display the employee number and name of employee working as clerk and earning highest salary among clerks. 
+```sql
 SELECT empno, enameFROM employee WHERE job = 'CLERK'
  AND sal = (SELECT MAX(sal) FROM employee WHERE job = 'CLERK');
  
@@ -19,8 +21,9 @@ SELECT empno, enameFROM employee WHERE job = 'CLERK'
 |  7934 | MILLER |
 +-------+--------+
 1 row in set (0.004 sec)
-
+```
 #### QUERY 3 : Display the names of the salesman who earns a salary more than the highest salary of any clerk.
+```sql
 SELECT ename FROM employee WHERE job = 'SALESMAN'
 AND sal > (SELECT MAX(sal) FROM employee WHERE job = 'CLERK');
 
@@ -31,9 +34,10 @@ AND sal > (SELECT MAX(sal) FROM employee WHERE job = 'CLERK');
 | TURNER |
 +--------+
 2 rows in set (0.001 sec)
-
+```
 #### QUERY 4 :Display the names of clerks who earn salary more than that of james of that of sal lesser than that of scott.
- SELECT ename FROM employee WHERE job = 'CLERK'
+ ```sql
+SELECT ename FROM employee WHERE job = 'CLERK'
  AND sal > (SELECT sal FROM employee WHERE ename = 'JAMES')
  AND sal < (SELECT sal FROM employee WHERE ename = 'SCOTT');
  
@@ -44,9 +48,10 @@ AND sal > (SELECT MAX(sal) FROM employee WHERE job = 'CLERK');
 | MILLER |
 +--------+
 2 rows in set (0.002 sec)
-
+```
 #### QUERY 5 : Display the names of employees who earn a sal more than that of james or that of salary greater than that of scott.
- SELECT ename FROM employee
+ ```sql
+SELECT ename FROM employee
  WHERE sal > (SELECT sal FROM employee WHERE ename = 'JAMES')
  OR sal > (SELECT sal FROM employee WHERE ename = 'SCOTT');
  
@@ -67,8 +72,9 @@ AND sal > (SELECT MAX(sal) FROM employee WHERE job = 'CLERK');
 | MILLER |
 +--------+
 12 rows in set (0.001 sec)
-
+```
 #### QUERY 6 : Display the names of the employees who earn highest salary in their respective departments. 
+```sql
 SELECT ename, deptno FROM employee e
  WHERE sal = (SELECT MAX(sal)  FROM employee WHERE deptno = e.deptno);
  
@@ -81,8 +87,9 @@ SELECT ename, deptno FROM employee e
 | MILLER |     10 |
 +--------+--------+
 4 rows in set (0.001 sec)
-
+```
 #### QUERY 7 : Display the names of employees who earn highest salaries in their respective job groups. 
+```sql
 SELECT ename, job FROM employee e
  WHERE sal = ( SELECT MAX(sal) FROM employee WHERE job = e.job);
  
@@ -97,8 +104,9 @@ SELECT ename, job FROM employee e
 | MILLER | CLERK     |
 +--------+-----------+
 6 rows in set (0.001 sec)
-
+```
 #### QUERY 8 : Display the employee names who are working in accounting dept. 
+```sql
 SELECT ename FROM employee
  WHERE deptno = (SELECT deptno FROM department WHERE dname = 'ACCOUNTING');
  
@@ -113,8 +121,9 @@ SELECT ename FROM employee
 | FORD  |
 +-------+
 6 rows in set (0.007 sec)
-
+```
 #### QUERY 9 : Display the employee names who are working in France.
+```sql
 SELECT ename FROM employee
 WHERE deptno = (SELECT deptno FROM department WHERE location = 'FRANCE');
 
@@ -129,9 +138,10 @@ WHERE deptno = (SELECT deptno FROM department WHERE location = 'FRANCE');
 | FORD  |
 +-------+
 6 rows in set (0.001 sec)
-
+```
 #### QUERY 10 :  Display the job groups having total salary greater than the maximum salary for managers.
- SELECT job FROM employee GROUP BY job
+ ```sql
+SELECT job FROM employee GROUP BY job
  HAVING SUM(sal) > (SELECT MAX(sal) FROM employee WHERE job = 'MANAGER');
  
 +-----------+
@@ -144,3 +154,4 @@ WHERE deptno = (SELECT deptno FROM department WHERE location = 'FRANCE');
 | SALESMAN  |
 +-----------+
 5 rows in set (0.002 sec)
+```
