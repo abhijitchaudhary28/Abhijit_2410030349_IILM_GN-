@@ -1,6 +1,7 @@
-# EXPERIMENT 1
+# EXPERIMENT 8
 #### QUERY 1 : Display all employees with their dept name. 
- SELECT e.ename, d.dname FROM employee e
+ ```sql
+SELECT e.ename, d.dname FROM employee e
  JOIN department d ON e.deptno = d.deptno;
  
 +--------+------------+
@@ -22,8 +23,9 @@
 | MILLER | research   |
 +--------+------------+
 14 rows in set (0.002 sec)
-
+```
 #### QUERY 2 : Display those employees whose manager names is jones, and also display their manager name.
+```sql
 SELECT e.ename AS employee, m.ename AS manager FROM employee e
 JOIN employee m ON e.mgr = m.empno WHERE m.ename = 'JONES';
 
@@ -34,8 +36,9 @@ JOIN employee m ON e.mgr = m.empno WHERE m.ename = 'JONES';
 | FORD     | JONES   |
 +----------+---------+
 2 rows in set (0.002 sec)
-
+```
 #### QUERY 3 : Display employee name, his job, his dept name, his manager name, his grade and make out of an under department wise.
+```sql
 SELECT e.ename, e.job, d.dname, m.ename AS manager, s.grade FROM employee e
    JOIN department d ON e.deptno = d.deptno
    JOIN salgrade s ON e.sal BETWEEN s.lowsal AND s.highsal
@@ -60,8 +63,9 @@ SELECT e.ename, e.job, d.dname, m.ename AS manager, s.grade FROM employee e
 | WARD   | SALESMAN  | sales      | BLAKE   |     2 |
 +--------+-----------+------------+---------+-------+
 14 rows in set (0.008 sec)
-
+```
 #### QUERY 4 : List out all the employees name, job, and salary grade and department name for everyone in the company except ‘clerk’. Sort on salary display the highest salary.
+```sql
 SELECT e.ename, e.job, e.sal, s.grade, d.dname FROM employee e
    JOIN department d ON e.deptno = d.deptno
    JOIN salgrade s ON e.sal BETWEEN s.lowsal AND s.highsal
@@ -82,8 +86,9 @@ SELECT e.ename, e.job, e.sal, s.grade, d.dname FROM employee e
 | WARD   | SALESMAN  | 1250 |     2 | sales      |
 +--------+-----------+------+-------+------------+
 10 rows in set (0.001 sec)
-
+```
 #### QUERY 5 : Display employee name, his job and his manager. Display also employees who are without manager. 
+```sql
 SELECT e.ename, e.job, COALESCE(m.ename, 'NO MANAGER') AS manager FROM employee e
    LEFT JOIN employee m ON e.mgr = m.empno;
    
@@ -106,8 +111,9 @@ SELECT e.ename, e.job, COALESCE(m.ename, 'NO MANAGER') AS manager FROM employee 
 | MILLER | CLERK     | CLARK      |
 +--------+-----------+------------+
 14 rows in set (0.001 sec)
-
+```
 #### QUERY 6 : List the employee name, job, annual salary, deptno, dept name and grade who earn 36000 a year or who are not clerks. 
+```sql
 SELECT e.ename, e.job, (e.sal*12) AS annual_sal, e.deptno, d.dname, s.grade FROM employee e
  JOIN department d ON e.deptno = d.deptno
  JOIN salgrade s ON e.sal BETWEEN s.lowsal AND s.highsal
@@ -128,16 +134,18 @@ SELECT e.ename, e.job, (e.sal*12) AS annual_sal, e.deptno, d.dname, s.grade FROM
 | FORD   | ANALYST   |      39600 |     20 | accounting |     5 |
 +--------+-----------+------------+--------+------------+-------+
 10 rows in set (0.002 sec)
-
+```
 #### QUERY 7 : List ename, job, annual sal, deptno, dname and grade who earn 30000 per year and who are not clerks. 
- SELECT e.ename, e.job, (e.sal*12) AS annual_sal, e.deptno, d.dname, s.grade FROM employee e
+ ```sql
+SELECT e.ename, e.job, (e.sal*12) AS annual_sal, e.deptno, d.dname, s.grade FROM employee e
  JOIN department d ON e.deptno = d.deptno
  JOIN salgrade s ON e.sal BETWEEN s.lowsal AND s.highsal
  WHERE (e.sal*12 = 30000) AND (e.job <> 'CLERK');
  
 Empty set (0.001 sec)
-
+```
 #### QUERY 8 : List out all employees by name and number along with their manager’s name and number also display ‘no manager’ who has no manager. 
+```sql
 SELECT e.empno, e.ename,
 COALESCE(m.empno, 'NO MANAGER') AS mgr_no,
 COALESCE(m.ename, 'NO MANAGER') AS mgr_name FROM employee e
@@ -162,8 +170,9 @@ LEFT JOIN employee m ON e.mgr = m.empno;
 |  7934 | MILLER | 7782       | CLARK      |
 +-------+--------+------------+------------+
 14 rows in set (0.001 sec)
-
+```
 #### QUERY 9 : Select dept name, dept no and sum of sal.
+```sql
 SELECT d.dname, d.deptno, SUM(e.sal) AS total_sal FROM employee e
  JOIN department d ON e.deptno = d.deptno
  GROUP BY d.dname, d.deptno;
@@ -177,8 +186,9 @@ SELECT d.dname, d.deptno, SUM(e.sal) AS total_sal FROM employee e
 | sales      |     30 |      9930 |
 +------------+--------+-----------+
 4 rows in set (0.002 sec)
-
+```
 #### QUERY 10 : Display employee number, name and location of the department in which he is working.
+```sql
 SELECT e.empno, e.ename, d.location FROM employee e
 JOIN department d ON e.deptno = d.deptno;
 
@@ -201,9 +211,10 @@ JOIN department d ON e.deptno = d.deptno;
 |  7934 | MILLER | NEW YORK   |
 +-------+--------+------------+
 14 rows in set (0.001 sec)
-
+```
 #### QUERY 11 : Display employee name and department name for each employee.
- SELECT e.ename, d.dname FROM employee e
+ ```sql
+SELECT e.ename, d.dname FROM employee e
  JOIN department d ON e.deptno = d.deptno;
  
 +--------+------------+
@@ -225,3 +236,4 @@ JOIN department d ON e.deptno = d.deptno;
 | MILLER | research   |
 +--------+------------+
 14 rows in set (0.001 sec)
+```
